@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blogs</title>
+</head>
+<body>
+
+    <h1>All Blogs</h1>
+
+    <a href="{% url 'create_blog' %}">Create New Blog</a>
+
+    <hr>
+
+    {% for blog in blog %}
+
+        <h2>{{ blog.title }}</h2>
+
+        <p>{{ blog.content }}</p>
+
+        <p>
+            Author: {{ blog.user.username }}
+        </p>
+
+        <a href="{% url 'edit_blog' blog.id %}">Edit</a>
+
+        <a href="{% url 'delete_blog' blog.id %}">Delete</a>
+
+        <hr>
+
+    {% empty %}
+
+        <p>No blogs available.</p>
+
+    {% endfor %}
+
+</body>
+</html>
+```
