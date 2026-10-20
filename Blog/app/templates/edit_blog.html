@@ -1,38 +1,46 @@
+
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Edit Blog</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Blog | InkSpace</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+<nav class="navbar">
+    <div class="nav-inner">
+        <a class="logo" href="{% url 'Blog_list' %}">Ink<span>Space.</span></a>
+        <a class="btn btn-secondary" href="{% url 'Blog_list' %}">← Dashboard</a>
+    </div>
+</nav>
 
-    <h1>Edit Blog</h1>
+<main class="container">
+    <div class="form-card">
+        <p class="author">EDITING ARTICLE</p>
+        <h1>Refine your story.</h1>
+        <p class="subtitle">Make your changes and save when you're ready.</p>
 
-    <form method="POST">
-        {% csrf_token %}
+        <form method="POST">
+            {% csrf_token %}
 
-       
+            <div class="form-group">
+                <label for="title">Blog title</label>
+                <input id="title" type="text" name="title"
+                       value="{{ blog.title }}" required>
+            </div>
 
-        <label>Title:</label>
-        <input
-            type="text"
-            name="title"
-            value="{{ blog.title }}"
-            required
-        >
+            <div class="form-group">
+                <label for="description">Your story</label>
+                <textarea id="description" name="description"
+                          required>{{ blog.description }}</textarea>
+            </div>
 
-        <br><br>
-
-        <label>Description:</label>
-        <textarea name="description" required>{{ blog.description }}</textarea>
-
-        <br><br>
-
-        <button type="submit">Update Blog</button>
-    </form>
-
-    <br>
-
-    <a href="{% url 'Blog_list' %}">Cancel</a>
-
+            <button class="btn" type="submit">Save Changes →</button>
+            <a class="btn btn-secondary" href="{% url 'Blog_list' %}">Cancel</a>
+        </form>
+    </div>
+</main>
 </body>
 </html>

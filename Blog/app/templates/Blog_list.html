@@ -1,35 +1,55 @@
+
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Blogs</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | InkSpace</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+<nav class="navbar">
+    <div class="nav-inner">
+        <a class="logo" href="{% url 'Blog_list' %}">Ink<span>Space.</span></a>
+        <div class="actions" style="margin:0">
+            <a class="btn" href="{% url 'create_blog' %}">+ New Blog</a>
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button class="btn btn-secondary" type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+</nav>
 
-    <h1>All Blogs</h1>
+<main class="container">
+    <h1>Your ideas, your stories.</h1>
+    <p class="subtitle">A home for everything you want to share.</p>
 
-    <a href="{% url 'create_blog' %}">Create New Blog</a>
+    {% if blog %}
+    <div class="blog-grid">
+        {% for item in blog %}
+        <article class="blog-card">
+            <p class="author">ARTICLE · BY {{ item.user.username }}</p>
+            <h2>{{ item.title }}</h2>
+            <p class="blog-description">{{ item.description }}</p>
 
-    <hr>
-
-    {% for blog in blog %}
-
-        <h2>{{ blog.title }}</h2>
-
-        <p>{{ blog.description }}</p>
-
-        <p>Author: {{ blog.author }}</p>
-
-        <a href="{% url 'edit_blog' blog.id %}">Edit</a>
-
-        <a href="{% url 'delete_blog' blog.id %}">Delete</a>
-
-        <hr>
-
-    {% empty %}
-
-        <p>No blogs available.</p>
-
-    {% endfor %}
-
+            <div class="actions">
+                <a class="btn btn-secondary"
+                   href="{% url 'edit_blog' item.id %}">Edit</a>
+                <a class="btn btn-danger"
+                   href="{% url 'delete_blog' item.id %}">Delete</a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <h2>Your story starts here.</h2>
+        <p>You haven't published a blog yet.</p>
+        <a class="btn" href="{% url 'create_blog' %}">Write your first blog</a>
+    </div>
+    {% endif %}
+</main>
 </body>
 </html>

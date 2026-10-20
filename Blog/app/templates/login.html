@@ -1,27 +1,53 @@
-<h1>Login</h1>
 
-{% if error %}
-    <p>{{ error }}</p>
-{% endif %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | InkSpace</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-inner">
+        <a class="logo" href="{% url 'login' %}">Ink<span>Space.</span></a>
+        <a class="btn btn-secondary" href="{% url 'register' %}">Create account</a>
+    </div>
+</nav>
 
-<form method="POST">
+<main class="container">
+    <div class="form-card">
+        <h1>Welcome back.</h1>
+        <p class="subtitle">Sign in to continue writing your stories.</p>
 
-    {% csrf_token %}
+        {% if error %}
+            <div class="error-message">{{ error }}</div>
+        {% endif %}
 
-    <input
-        type="text"
-        name="username"
-        placeholder="Username"
-    >
+        <form method="POST">
+            {% csrf_token %}
 
-    <input
-        type="password"
-        name="password"
-        placeholder="Password"
-    >
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input id="username" type="text" name="username"
+                       placeholder="Your username" required>
+            </div>
 
-    <button type="submit">
-        Login
-    </button>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password"
+                       placeholder="Your password" required>
+            </div>
 
-</form>
+            <button class="btn" type="submit">Sign In →</button>
+        </form>
+
+        <p class="subtitle" style="margin-top:24px;margin-bottom:0">
+            New here?
+            <a href="{% url 'register' %}">Create an account</a>
+        </p>
+    </div>
+</main>
+</body>
+</html>

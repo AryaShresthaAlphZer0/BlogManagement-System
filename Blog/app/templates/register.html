@@ -1,29 +1,55 @@
-<h1>Register</h1>
 
-<form method="POST">
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | InkSpace</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-inner">
+        <a class="logo" href="{% url 'login' %}">Ink<span>Space.</span></a>
+        <a class="btn btn-secondary" href="{% url 'login' %}">Sign in</a>
+    </div>
+</nav>
 
-    {% csrf_token %}
+<main class="container">
+    <div class="form-card">
+        <h1>Create your account.</h1>
+        <p class="subtitle">Join InkSpace and start sharing your ideas.</p>
 
-    <input
-        type="text"
-        name="username"
-        placeholder="Username"
-    >
+        <form method="POST">
+            {% csrf_token %}
 
-    <input
-        type="email"
-        name="email"
-        placeholder="Email"
-    >
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input id="username" type="text" name="username"
+                       placeholder="Choose a username" required>
+            </div>
 
-    <input
-        type="password"
-        name="password"
-        placeholder="Password"
-    >
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input id="email" type="email" name="email"
+                       placeholder="you@example.com" required>
+            </div>
 
-    <button type="submit">
-        Register
-    </button>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password"
+                       placeholder="Create a password" required>
+            </div>
 
-</form>
+            <button class="btn" type="submit">Create Account →</button>
+        </form>
+
+        <p class="subtitle" style="margin-top:24px;margin-bottom:0">
+            Already registered?
+            <a href="{% url 'login' %}">Sign in</a>
+        </p>
+    </div>
+</main>
+</body>
+</html>

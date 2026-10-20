@@ -1,28 +1,47 @@
+
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Create Blog</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Blog | InkSpace</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h1>Create a Blog</h1>
+<nav class="navbar">
+    <div class="nav-inner">
+        <a class="logo" href="{% url 'Blog_list' %}">Ink<span>Space.</span></a>
+        <a class="btn btn-secondary" href="{% url 'Blog_list' %}">← Dashboard</a>
+    </div>
+</nav>
 
-    <form method="POST">
-        {% csrf_token %}
+<main class="container">
+    <div class="form-card">
+        <p class="author">NEW ARTICLE</p>
+        <h1>Write something meaningful.</h1>
+        <p class="subtitle">Your next great idea begins with a title.</p>
 
-        
+        <form method="POST">
+            {% csrf_token %}
 
+            <div class="form-group">
+                <label for="title">Blog title</label>
+                <input id="title" type="text" name="title"
+                       placeholder="Give your story a name..." required>
+            </div>
 
-        <label>Title:</label>
-        <input type="text" name="title" required>
+            <div class="form-group">
+                <label for="description">Your story</label>
+                <textarea id="description" name="description"
+                          placeholder="Start writing here..."
+                          required></textarea>
+            </div>
 
-        <br><br>
-
-        <label>Description:</label>
-        <textarea name="description" required></textarea>
-
-        <br><br>
-
-        <button type="submit">Create Blog</button>
-    </form>
+            <button class="btn" type="submit">Publish Blog →</button>
+            <a class="btn btn-secondary" href="{% url 'Blog_list' %}">Cancel</a>
+        </form>
+    </div>
+</main>
 </body>
 </html>
