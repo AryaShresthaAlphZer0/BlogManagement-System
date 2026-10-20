@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,11 +15,9 @@
 
         <h2>{{ blog.title }}</h2>
 
-        <p>{{ blog.content }}</p>
+        <p>{{ blog.description }}</p>
 
-        <p>
-            Author: {{ blog.user.username }}
-        </p>
+        <p>Author: {{ blog.author }}</p>
 
         <a href="{% url 'edit_blog' blog.id %}">Edit</a>
 
@@ -36,4 +33,3 @@
 
 </body>
 </html>
-```

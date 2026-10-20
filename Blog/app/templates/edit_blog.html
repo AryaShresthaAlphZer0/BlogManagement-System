@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +10,20 @@
     <form method="POST">
         {% csrf_token %}
 
+       
+
         <label>Title:</label>
-        <input type="text" name="title" value="{{ blog.title }}" required>
+        <input
+            type="text"
+            name="title"
+            value="{{ blog.title }}"
+            required
+        >
 
         <br><br>
 
-        <label>Content:</label>
-        <textarea name="content" rows="10" cols="50" required>{{ blog.content }}</textarea>
+        <label>Description:</label>
+        <textarea name="description" required>{{ blog.description }}</textarea>
 
         <br><br>
 

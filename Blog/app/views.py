@@ -52,13 +52,12 @@ def Blog_list(request):
 @login_required
 def create_blog(request):
     if request.method == 'POST':
-        author = request.POST['author']
+        
         title = request.POST['title']
         description = request.POST['description']
 
         Blog.objects.create(
             user=request.user,
-            author=author,
             title = title,
             description=description
         )
@@ -71,12 +70,12 @@ def edit_blog(request,blog_id):
         Blog, id = blog_id, user = request.user
     )
     if request.method == 'POST':
-        blog.author = request.POST['author']
+        
         blog.title = request.POST['title']
         blog.description=request.POST['description']
         blog.save()
 
-        return render('blog_list')
+        return redirect('Blog_list')
     return render(request,'edit_blog.html',{'blog':blog})
 
 @login_required
@@ -86,6 +85,7 @@ def delete_blog(request,blog_id):
     )
     if request.method == 'POST':
         blog.delete()
+        return redirect('Blog_list')
 
-    return redirect('Blog_list')
+    return render(request,'delete_blog.html',{'blog':blog})
 
